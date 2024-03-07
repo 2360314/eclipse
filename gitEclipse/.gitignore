@@ -1,6 +1,4 @@
 /bin/
-*.class
-*.java
 *.exe
 *.zip
 *.png
