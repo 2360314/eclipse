@@ -45,12 +45,10 @@ public class StackQueue {
 
 	public static void main(String[] args) {
 
-		
-
 		MyStack ms = new MyStack();
 		MyQueue mq = new MyQueue();
-		
-		Memory m = ms;
+
+		Memory m;
 		Scanner sc = new Scanner(System.in);
 
 		do {
@@ -61,7 +59,8 @@ public class StackQueue {
 				m = ms;
 			} else if (num == 2) {
 				m = mq;
-			}
+			} else
+				break;
 
 			while (true) {
 				System.out.print("1.push 2.pop 3.back");
