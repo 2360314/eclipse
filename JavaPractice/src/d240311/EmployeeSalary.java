@@ -136,7 +136,7 @@ public class EmployeeSalary {
 					case 1: ed[i].setName(sc.next()); break;
 					case 2: ed[i].setSalBasic(sc.nextInt()); break;
 					case 3: ed[i].setDept(sc.next()); break;
-					case 4: ed[i].setPosition(sc.next()); break;		// 다른 클래스에 있는데..?
+					// case 4: ed[i].setPosition(sc.next()); break;		// 다른 클래스에 있는데..?
 					case 5: ed[i].setEmpType(sc.nextInt()); break;
 					
 					}
