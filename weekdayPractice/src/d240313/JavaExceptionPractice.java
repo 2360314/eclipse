@@ -16,11 +16,10 @@ public class JavaExceptionPractice {
 		Scanner sc = new Scanner(System.in);
 		try {
 		int a = sc.nextInt();
-		
-		System.out.println(3/a);
+		System.out.println(3/a);		// 3을 입력받은 값으로 나누는 값 출력
 		}
 		catch(ArithmeticException ae) {
-			System.out.println("숫자입력오류");
+			System.out.println("숫자입력오류");	// 0으로 나누면 Arithmetic예외로 숫자입력오류 출력
 		}
 	}
 }
