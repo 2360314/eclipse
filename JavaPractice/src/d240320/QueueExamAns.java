@@ -25,29 +25,28 @@ public class QueueExamAns {
 	}
 	
 	public void shift() {
-		int count = 0;
-		for(int i = 0; i<data.length; i++) {
-			if(data[i] != 0 ) {
-				data[i-count] = data[i];
-				data[i] = 0;
-//				
-			}
-			else {		
-				count++;
-			}
-		}	
-		front = 0;
-		rear = rear-count;
+//		int count = 0;
+//		for(int i = 0; i<data.length; i++) {
+//			if(data[i] != 0 ) {
+//				data[i-count] = data[i];
+//				data[i] = 0;			
+//			}
+//			else {		
+//				count++;
+//			}
+//		}	
+//		front = 0;
+//		rear = rear-count;
 		
 //		shift 메서드 강사 정답
-//		int i;
-//		int num = rear-front;
-//		for(i = 0; i<num;i++) {
-//			data[i] = data[front];
-//			data[front++] = 0;
-//		}
-//		front = 0;
-//		rear = i;
+		int i;
+		int num = rear-front;
+		for(i = 0; i<num;i++) {
+			data[i] = data[front];
+			data[front++] = 0;
+		}
+		front = 0;
+		rear = i;
 		
 	}
 	
