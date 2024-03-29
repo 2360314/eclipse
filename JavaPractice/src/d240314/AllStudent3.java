@@ -1,13 +1,17 @@
 package d240314;
 
 import java.util.*;
+import d240321.*;
 
 public class AllStudent3 {
 	
-	ArrayList<StudentArrayList> list;			// list라는 StudentData의 래퍼런스 제네릭생성 
+	ArrayList<StudentArrayList> list;	// list라는 StudentData의 래퍼런스 제네릭생성
+	
 
 	public AllStudent3() {
-		list = new ArrayList<StudentArrayList>();
+		list = new ArrayList<StudentArrayList>();	
+		
+		
 	}
 	
 	public static void main(String[] args) {
@@ -36,7 +40,7 @@ public class AllStudent3 {
 	}
 	
 	// 1. 학생정보입력
-		private void setStudent() {
+		public void setStudent() {
 			
 			StudentArrayList stu = new StudentArrayList(); // 학생객체생성
 			Scanner sc = new Scanner(System.in);		
@@ -52,21 +56,23 @@ public class AllStudent3 {
 			stu.getTotal();
 			stu.getAvg();
 			
-			list.add(stu);
+			list.add(stu);		// ListArray
+			
 			
 	
 //			this.stu[index++]=stu;  // 배열일 때는 이렇게 해서 넘겼었다.		
 		}
 		
 	// 2. 학생정보수정
-	private void setModify() {
+		public void setModify() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("누구의 점수를 수정할까요? ");
 		String name = sc.next();
 		
 		int i=0;
 		while(true) {
-			if( name.equals(list.get(i).getName())) {
+			if( name.equals(list.get(i).getName())) {	// ArrayList
+			
 				System.out.println("찾았습니다. ");
 				
 				while(true) {
@@ -77,9 +83,10 @@ public class AllStudent3 {
 					
 					int n = sc.nextInt();
 					switch(n) {
-					case 1: list.get(i).setKor(sc.nextInt()); break;
-					case 2: list.get(i).setEng(sc.nextInt()); break;
-					case 3: list.get(i).setMat(sc.nextInt()); break;
+					case 1: list.get(i).setKor(sc.nextInt()); break;	// ArrayList	
+					case 2: list.get(i).setEng(sc.nextInt()); break;	// ArrayList
+					case 3: list.get(i).setMat(sc.nextInt()); break;	// ArrayList
+					
 					
 					}
 					if(n == 4) break; 
@@ -92,23 +99,25 @@ public class AllStudent3 {
 	}
 	
 	// 3. 학생정보검색
-	private void setSearch() {
+		public void setSearch() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("누구 찾나요? ");
 		String name = sc.next();
 		
 		int i=0;
 		while(true) {
-			if( name.equals(list.get(i).getName())) {
+			if( name.equals(list.get(i).getName())) {	// ArrayList
+
 				System.out.println("찾았습니다. ");
 				System.out.println("이름"+"\t"+"국어"+"\t"+"영어"+"\t"+"수학"+"\t"+"총점"+"\t"+"평균");
 				System.out.println("=============================================");				
-				System.out.print(list.get(i).getName()+"\t");
-				System.out.print(list.get(i).getKor()+"\t");
-				System.out.print(list.get(i).getEng()+"\t");
-				System.out.print(list.get(i).getMat()+"\t");
-				System.out.print(list.get(i).getTotal()+"\t");
-				System.out.println(list.get(i).getAvg());
+				System.out.print(list.get(i).getName()+"\t");	// ArrayList
+				System.out.print(list.get(i).getKor()+"\t");	// ArrayList
+				System.out.print(list.get(i).getEng()+"\t");	// ArrayList
+				System.out.print(list.get(i).getMat()+"\t");	// ArrayList
+				System.out.print(list.get(i).getTotal()+"\t");	// ArrayList
+				System.out.println(list.get(i).getAvg());		// ArrayList
+				
 				
 				break;
 				
@@ -120,10 +129,10 @@ public class AllStudent3 {
 	}
 	
 	// 4. 학생전체출력
-	private void setDisp() {
+		public void setDisp() {
 			System.out.println("이름"+"\t"+"국어"+"\t"+"영어"+"\t"+"수학"+"\t"+"총점"+"\t"+"평균");
 			System.out.println("=============================================");
-		for(StudentArrayList s:list) {
+		for(StudentArrayList s:list) {		// ArrayList
 			if(s == null) break;
 			System.out.print(s.getName()+"\t");
 			System.out.print(s.getKor()+"\t");

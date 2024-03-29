@@ -1,8 +1,7 @@
-package d240314;
+package d240321Student;
 
-import java.util.*;
 
-public class StudentArrayList {
+public class StudentData{
 	
 	// 이름은 Name Clss 에서
 	// 과목은 Subject Class 에서
@@ -13,16 +12,16 @@ public class StudentArrayList {
 	Subject mat;
 	int total;
 	float avg;
-	StudentArrayList next;
+	StudentData next;
 	
 	
-	public StudentArrayList() {		// 생성자1.
+	public StudentData() {		// 생성자1.
 		name = new Name();
 		kor = new Subject();
 		eng = new Subject();
 		mat = new Subject();
 	}
-	public StudentArrayList(Name name, Subject kor, Subject eng, Subject mat) {		// 외부주입 기능 오버로딩
+	public StudentData(Name name, Subject kor, Subject eng, Subject mat) {		// 외부주입 기능 오버로딩
 		this.name = name;
 		this.kor = kor;
 		this.eng = eng;
@@ -96,15 +95,3 @@ class Subject {
 	}
 	
 }
-
-//class StudentArrayList{
-//	
-//	StudentData studata;
-//		
-//	public StudentArrayList(){
-//		list = new ArrayList<StudentData>();
-//		Scanner sc = new Scanner(System.in);
-//	}
-//	
-//}
-
