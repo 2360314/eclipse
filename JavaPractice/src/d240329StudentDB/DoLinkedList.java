@@ -1,19 +1,51 @@
-package d240321Student;
+package d240329StudentDB;
 
+import java.sql.*;
 import java.util.Scanner;
 
 public class DoLinkedList {
+	
+	// constructor_1
+	public DoLinkedList() {
+		this("jdbc:mysql://localhost:3306/mydb?severTimezone=UTC", "root", "qwe123!@#");
+	}
+	// constructor_2
+	public DoLinkedList(String url, String user, String pw) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(url, user, pw);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	static StudentData head;
 	static StudentData cur;
 	static StudentData newNode;
 	static StudentData del; 		// 이 4개. 처음엔 null 이니까 굳이 뒤에 머 안쓴다.
-
+	Connection conn;
+	PreparedStatement pstmt;
+	
 	// 1. 학생정보입력
 	public void add(StudentData stu) {
 		
-		// 삽입정렬을 위한 새로운 변수 선언
-		int newTotal = stu.getTotal();
+//		// insertSort 영역 시작
+//		// 1. 전체 LinkedList 의 길이 구하기
+//		int length = 0;
+//		while(cur != null) {
+//			length++;
+//		}
+//		
+//		// 2. 길이만큼 반복처리
+//		for (int i = 1; i < length; i++) {
+//	            // 현재 비교 대상의 값을 keyValue에 저장
+//	            int keyValue = cur;
+//	
+//	            // 현재 위치(i)의 이전 요소부터 역순으로 keyValue와 비교
+//	            int searchIndex = i - 1;
+//		}
 		
 		// head 여부 판단
 		if (head == null) { // 첫 학생 입력할 때 Head를 지정해야되니까 따로 구분함.
@@ -24,12 +56,7 @@ public class DoLinkedList {
 			
 		} else {			// 첫번째 학생이 이미 있는경우 그 뒤에 붙임
 			cur = head;
-			while  (cur.next != null) {
-				if(newTotal >= cur.next.getTotal()) {
-					stu.next = cur.next;
-					cur.next = stu;
-					return;
-				}
+			while (cur.next != null) {
 				cur = cur.next;
 			}
 			cur.next = stu;
@@ -158,5 +185,53 @@ public class DoLinkedList {
 			}
 			cur = cur.next;
 		}
+	}
+	
+	// 6. 테이블 저장
+	public void dbInput(StudentData stu) {
+//		try {
+//			String s = "drop table if exists studentTBL;";
+//			String sql = "CREATE TABLE studentTBL(\r\n"
+//					+ " id int NOT NULL AUTO_INCREMENT PRIMARY key\r\n"
+//					+ ",name varchar(100)\r\n"
+//					+ ",kor int(10)\r\n"
+//					+ ",eng int(10)\r\n"
+//					+ ",mat int(10)\r\n"
+//					+ ",total int(10)\r\n"
+//					+ ",avg float(10))";
+//			
+//			pstmt = conn.prepareStatement(s);
+//			pstmt.executeUpdate();
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.executeUpdate();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("==================");
+//		System.out.println("테이블생성완료");
+//		System.out.println("==================");
+		
+		try {
+			cur = head;
+			while (cur != null) {
+				String sql = "insert into studentTBL values(?,?,?,?,?,?)";
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, cur.getName());
+				pstmt.setInt(2, cur.getKor());
+				pstmt.setInt(3, cur.getEng());
+				pstmt.setInt(4, cur.getMat());
+				pstmt.setInt(5, cur.getTotal());
+				pstmt.setFloat(6, cur.getAvg());
+				pstmt.executeUpdate();
+				
+				cur = cur.next;
+			}
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		
+		}	
 	}
 }
