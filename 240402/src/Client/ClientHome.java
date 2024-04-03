@@ -9,8 +9,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.*;
 import java.net.Socket;
-import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 
 public class ClientHome extends JFrame  {
@@ -48,15 +48,28 @@ public class ClientHome extends JFrame  {
 	}
 	
 	// 이미지 추가
-	public void img() {
+	public void img() {	
 		try {	
 			mainImg = new JLabel(new ImageIcon("image/newProfile.jpg"));
 	    	clientHomePanel.add(mainImg);
-    	
+
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+//		try {	
+//	        mainImg = new JLabel(new ImageIcon("image/newProfile.jpg"));
+//	        clientHomePanel.add(mainImg);
+//	    } catch(IOException e) {
+//	        e.printStackTrace();
+//	    }
+//		
+//		File file = new File("C:\\javatest2\\eclipse\\240402\\image\\newProfile.jpg");
+//		BufferedImage bufferedImage = ImageIO.read(file);
+//		ImageIcon imageIcon = new ImageIcon(bufferedImage);
+//		
+//		mainImg.setIcon(imageIcon);
+//		clientHomePanel.add(mainImg);		
 	}
 
 	// 채팅방입장
@@ -72,6 +85,8 @@ public class ClientHome extends JFrame  {
 		clientHomePanel.add(chatButton);
 
 	}
+	
+	
 
 	public void sendToChatGui() {
         id = textField.getText(); // **** 로그인한 ID 읽어와야함

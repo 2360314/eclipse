@@ -145,6 +145,7 @@ public class JoinGui extends JFrame {
 			DbConnect db = new DbConnect();
 			try {
 				String sql = "insert into user values(?,?,?,?,?)";
+
 				db.pstmt = db.conn.prepareStatement(sql);
 
 				db.pstmt.setString(1, name);
@@ -153,16 +154,14 @@ public class JoinGui extends JFrame {
 				db.pstmt.setString(4, pw);
 				db.pstmt.setInt(5, 0);
 				db.pstmt.executeUpdate();
-				
+
 				JOptionPane.showMessageDialog(null, "회원가입 완료");
 				new EnterGui();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 
-		}
-
-		else {
+		} else {
 			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
 			nameField.setText(name);
 			empnoField.setText(empno);
@@ -171,7 +170,6 @@ public class JoinGui extends JFrame {
 			passwordCkField.setText("");
 			new JoinGui();
 		}
-		JOptionPane.showMessageDialog(null, "enroll끝");
 	}
 
 	// PW 일치여부 확인
