@@ -21,7 +21,7 @@ public class ClientHome extends JFrame  {
 	private JButton fortuneButton;  // 포춘쿠키 버튼
 	private JButton menuButton; 	// 점메추 버튼
 	private JButton logoutButton; 	// 점메추 버튼
-	private JTextField textField; // 텍스트 필드
+	private String id;
 	
 	public ClientHome() {
 		new DbConnect();
@@ -85,13 +85,13 @@ public class ClientHome extends JFrame  {
 		clientHomePanel.add(chatButton);
 
 	}
-	
-	
 
 	public void sendToChatGui() {
-        id = textField.getText(); // **** 로그인한 ID 읽어와야함
-        setVisible(false); // ClientHome 창 끄기
-        new ChatGui(id); // ChatGui에 ID name 값 전달
+		EnterGui eg = new EnterGui();
+		
+		id = eg.getEnteredID(); 
+        setVisible(false); 
+        new ChatGui(id);
 	}
 		
 	

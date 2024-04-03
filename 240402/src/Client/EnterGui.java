@@ -17,6 +17,9 @@ public class EnterGui extends JFrame {
 	private JButton joinButton; // 회원가입 버튼
 	private JButton mgrButton; // 회원가입 버튼
 	private String name; // ID
+	private String enteredID;
+	private String enteredPW;
+	
 
 	public EnterGui() {
 		new DbConnect();
@@ -70,10 +73,11 @@ public class EnterGui extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				// 입력한 ID/PW String으로 가져오기
-				String enteredID = idField.getText();
+				enteredID = idField.getText();
 				char[] password = passwordField.getPassword();
-				String enteredPW = new String(password);
-
+				enteredPW = new String(password);
+				
+				
 				// DB에서 사용자 정보 조회하여 일치하는지 확인
 				try {
 					boolean isUserValid = checkUserValidity(enteredID, enteredPW);
@@ -110,13 +114,6 @@ public class EnterGui extends JFrame {
 					e.printStackTrace();
 					return false; // 예외 발생 시 일치하지 않는 것으로 처리
 				}
-//			    while (rs.next()) {
-//					
-//					String dbID = rs.getString(1);
-//					String dbPW = rs.getString(2);
-//					
-//					System.out.println(deptNo+" "+deptName);
-//				}
 			}
 
 		});
@@ -129,6 +126,11 @@ public class EnterGui extends JFrame {
 		setVisible(false); // EnterGui 창 끄기
 		new ClientHome();
 	}
+	
+	// 채팅방 입장 시 ID 보내주는 메소드
+	public String getEnteredID() {
+        return enteredID;
+    }
 
 	// 회원가입 버튼
 	public void joinButtonEvent() {
