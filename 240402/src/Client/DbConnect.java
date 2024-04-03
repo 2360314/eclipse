@@ -12,7 +12,7 @@ public class DbConnect {
 	PreparedStatement pstmt;
 
 	public DbConnect() {
-		this("jdbc:mysql://localhost:3306/mydb?severTimezone=UTC", "root", "qwe123!@#");
+		this("jdbc:mysql://localhost:3306/mini?severTimezone=UTC", "root", "qwe123!@#");
 	}
 
 	public DbConnect(String url, String user, String pw) {

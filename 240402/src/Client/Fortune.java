@@ -59,7 +59,7 @@ public class Fortune extends JFrame {
 		rollButton.addActionListener(new ActionListener() {
 			// EnterGui 호출
 			public void actionPerformed(ActionEvent e) {
-				fortuneResult();
+				new Fortune();
 			}
 		});
 		rollButton.setBounds(200, 200, 130, 40);
@@ -121,7 +121,7 @@ public class Fortune extends JFrame {
 	}
 
 	public void sendToHome() {
-		setVisible(false); // JoinGui 창 끄기
+		setVisible(false); // 창 끄기
 		new EnterGui(); // 다시 홈화면으로
 	}
 }

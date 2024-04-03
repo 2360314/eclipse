@@ -46,7 +46,14 @@ public class Menu extends JFrame{
 	// 점심메뉴 구현 영역
 	public void menuResult() {
 		
-		JLabel menu = new JLabel("여기에 DB에서 읽어와서 뿌릴 것");
+		JLabel menu = new JLabel("Lunch Menu");
+		
+		try {
+			result();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		menu.setHorizontalAlignment(JLabel.CENTER);
 		menu.setBounds(150, 70, 200, 50);
 		menuHomePanel.add(menu);
@@ -56,11 +63,31 @@ public class Menu extends JFrame{
 		rollButton.addActionListener(new ActionListener() {
 			// EnterGui 호출
 			public void actionPerformed(ActionEvent e) {
-				sendToClientHome();	// 다른메뉴로 바꾸는 함수 구현필요
+				new Menu();
 			}
 		});
 		rollButton.setBounds(200, 200, 130, 40);
 		menuHomePanel.add(rollButton);
+	}
+	
+	public void result() throws SQLException {
+
+		DbConnect db = new DbConnect();
+		String sql = "select * from menu where index2 = ?";
+		db.pstmt = db.conn.prepareStatement(sql);
+
+		int randomValue = (int) (Math.random() * 7) + 1;	// 7개까지 insert돼있음
+
+		db.pstmt.setInt(1, randomValue);
+		
+		ResultSet rs = db.pstmt.executeQuery();
+
+		while (rs.next()) {
+			String menuTxt = rs.getString("menu");
+			JLabel menuText = new JLabel(menuTxt);
+			menuText.setBounds(200, 100, 200, 50);
+			menuHomePanel.add(menuText);
+		}
 	}
 
 	
@@ -70,7 +97,7 @@ public class Menu extends JFrame{
 		clientHomeButton.addActionListener(new ActionListener() {
 			// EnterGui 호출
 			public void actionPerformed(ActionEvent e) {
-				sendToClientHome();
+				sendToClientHome2();
 			}
 		});
 		clientHomeButton.setBounds(130, 300, 97, 23);
@@ -78,7 +105,7 @@ public class Menu extends JFrame{
 
 	}
 	
-	public void sendToClientHome() {
+	public void sendToClientHome2() {
 		setVisible(false); // 창 끄기
 		new ClientHome();  // clientHome화면으로
 	}
@@ -90,7 +117,7 @@ public class Menu extends JFrame{
 		homeButton.addActionListener(new ActionListener() {
 			// EnterGui 호출
 			public void actionPerformed(ActionEvent e) {
-				sendToHome();
+				sendToHome2();
 			}
 		});
 		homeButton.setBounds(300, 300, 97, 23);
@@ -98,8 +125,8 @@ public class Menu extends JFrame{
 
 	}
 	
-	public void sendToHome() {
-		setVisible(false); // JoinGui 창 끄기
+	public void sendToHome2() {
+		setVisible(false); // 창 끄기
 		new EnterGui(); // 다시 홈화면으로
 	}
 }

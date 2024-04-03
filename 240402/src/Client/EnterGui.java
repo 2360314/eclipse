@@ -1,11 +1,15 @@
 package Client;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Manager.MgrHome;
+
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -15,7 +19,8 @@ import java.awt.event.KeyListener;
 
 public class EnterGui extends JFrame {
     private JPanel enterPane; // 전체틀 생성
-    private JTextField textField; // ID 읽어오는 텍스트 필드
+    private JTextField idField; // ID 읽어오는 텍스트 필드
+    private JPasswordField passwordField;
     private JButton enterButton; // 로그인 버튼
     private JButton joinButton;  // 회원가입 버튼
     private JButton mgrButton;  // 회원가입 버튼
@@ -48,34 +53,41 @@ public class EnterGui extends JFrame {
         id.setBounds(100, 30, 80, 15);
         enterPane.add(id);
 
-        textField = new JTextField();
-        textField.setBounds(200, 30, 115, 20);
-        enterPane.add(textField);
-        textField.setColumns(10); // 글자수 제한
+        idField = new JTextField();
+        idField.setBounds(200, 30, 115, 20);
+        enterPane.add(idField);
+        idField.setColumns(10); // 글자수 제한
     }
     public void pwLabel() {
         JLabel id = new JLabel("PW 입력");
         id.setBounds(100, 80, 80, 15);
         enterPane.add(id);
 
-        textField = new JTextField();
-        textField.setBounds(200, 80, 115, 20);
-        enterPane.add(textField);
-        textField.setColumns(10); // 글자수 제한
+        passwordField = new JPasswordField();
+        passwordField.setBounds(200, 80, 115, 20);
+        enterPane.add(passwordField);
+        passwordField.setColumns(10); // 글자수 제한
     }
 
-    // 로그인 버튼
-    public void enterButtonEvent() {
-        enterButton = new JButton("로그인");
-        enterButton.addActionListener(new ActionListener() {
-            // 로그인 버튼 클릭시 이벤트 처리
-            public void actionPerformed(ActionEvent e) {
-                sendToClientHome();
-            }
-        });
-        enterButton.setBounds(100, 134, 97, 23);
-        enterPane.add(enterButton);
-    }
+    // 입력한 ID/PW String으로 가져오기
+    String id = idField.getText();
+    char[] password = passwordField.getPassword();
+    String pw = new String(password);
+    
+    
+	// 로그인 버튼
+	public void enterButtonEvent() {
+		enterButton = new JButton("로그인");
+		enterButton.addActionListener(new ActionListener() {
+		// 로그인 버튼 클릭시 이벤트 처리 - if-else (id-pw 일치여부 확인)
+
+			public void actionPerformed(ActionEvent e) {
+				sendToClientHome();
+			}
+		});
+		enterButton.setBounds(100, 134, 97, 23);
+		enterPane.add(enterButton);
+	}
         
     // ClientHome으로 보내기
     public void sendToClientHome() {
